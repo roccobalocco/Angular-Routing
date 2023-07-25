@@ -24,7 +24,7 @@
         <thead>
           <tr>
             <th>
-              <button class="btn btn-outline-primary btn-sm"
+              <button nz-button nzType="primary"
                       (click)="toggleImage()">
                 {{showImage ? "Hide" : "Show"}} Image
               </button>
@@ -47,7 +47,7 @@
                    [style.margin.px]="imageMargin">
             </td>
             <td>
-              <a>
+              <a [routerLink]="['/products', product.id]">
                 {{ product.productName }}
               </a>
             </td>
@@ -59,7 +59,7 @@
               </pm-star>
             </td>
             <td>
-              <button class="btn btn-outline-primary btn-sm">
+              <button nz-button nzType="primary" [routerLink]="['/products', product.id, 'edit']">
                 Edit
               </button>
             </td>

@@ -5,14 +5,14 @@
 
   <div class="card-body"
        *ngIf="product">
-    <form novalidate
+    <form novalidate nz-form
           #productForm="ngForm">
 
-      <div class="row mt-2">
-        <label class="col-md-2 col-form-label"
-               for="productNameId">Product Name</label>
-        <div class="col-md-8">
-          <input class="form-control"
+      <nz-form-item>
+        <nz-form-label nzSpan="3">Product Name</nz-form-label>
+        <nz-form-control>
+          <input nz-input
+                 class="form-control"
                  id="productNameId"
                  type="text"
                  placeholder="Name (required)"
@@ -30,14 +30,13 @@
               Product name must be at least three characters.
             </span>
           </span>
-        </div>
-      </div>
+        </nz-form-control>
+      </nz-form-item>
 
-      <div class="row mt-2">
-        <label class="col-md-2 col-form-label"
-               for="productCodeId">Product Code</label>
-        <div class="col-md-8">
-          <input class="form-control"
+      <nz-form-item>
+        <nz-form-label nzSpan="3"> Code</nz-form-label>
+        <nz-form-control>
+          <input nz-input class="form-control"
                  id="productCodeId"
                  type="text"
                  placeholder="Code (required)"
@@ -51,25 +50,24 @@
               Product code is required.
             </span>
           </span>
-        </div>
-      </div>
+        </nz-form-control>
+      </nz-form-item>
 
-      <div class="row mt-2">
-        <label class="col-md-2 col-form-label"
-               for="descriptionId">Description</label>
+      <nz-form-item>
+        <nz-form-label nzSpan="3">Description</nz-form-label>
         <div class="col-md-8">
-          <textarea class="form-control"
+          <textarea nz-input class="form-control"
                     id="descriptionId"
                     placeholder="Description"
                     rows=3
                     [(ngModel)]=product.description
                     name="description"></textarea>
         </div>
-      </div>
+      </nz-form-item>
 
-      <div class="row mt-2">
-        <div class="col-md-4">
-          <button class="btn btn-primary mr-3"
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" [routerLink]="['/products', product.id]"
                   style="width:80px"
                   type="button"
                   [title]="productForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
@@ -77,21 +75,21 @@
                   (click)="saveProduct()">
             Save
           </button>
-          <button class="btn btn-outline-secondary mr-3"
+          <button nz-button [routerLink]="['/products', product.id]"
                   style="width:80px"
                   type="button"
                   title="Cancel your edits">
             Cancel
           </button>
-          <button class="btn btn-outline-warning"
+          <button nz-button nzDanger [routerLink]="['/products']"
                   style="width:80px"
                   type="button"
                   title="Delete this product"
                   (click)="deleteProduct()">
             Delete
           </button>
-        </div>
-      </div>
+        </nz-form-control>
+      </nz-form-item>
     </form>
   </div>
 </div>

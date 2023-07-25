@@ -13,11 +13,11 @@
                  placeholder="Category (required)"
                  required
                  minlength="3"
-                 [(ngModel)]="product.category"
+                 ngModel=product.category
                  name="category"
                  #categoryVar="ngModel"
                  [ngClass]="{'is-invalid': (categoryVar.touched ||
-                                            categoryVar.dirty || 
+                                            categoryVar.dirty ||
                                             product.id !== 0) &&
                                             !categoryVar.valid }" />
           <span class="invalid-feedback">

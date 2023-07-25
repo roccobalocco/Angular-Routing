@@ -15,6 +15,22 @@ import { ProductModule } from './products/product.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
 
+// Router importation
+import { AppRoutingModule } from './app-routing.module';
+
+// NgZorro importation
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { it_IT } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import it from '@angular/common/locales/it';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzFormModule } from 'ng-zorro-antd/form';
+
+registerLocaleData(it);
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -22,13 +38,23 @@ import { MessageModule } from './messages/message.module';
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
     ProductModule,
     UserModule,
-    MessageModule
+    MessageModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    NzMenuModule,
+    NzDividerModule,
+    NzFormModule
   ],
   declarations: [
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: NZ_I18N, useValue: it_IT }
+  ]
 })
 export class AppModule { }
