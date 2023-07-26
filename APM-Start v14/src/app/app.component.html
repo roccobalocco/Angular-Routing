@@ -1,49 +1,87 @@
-<!-- <span class="fa fa-spinner spinner"></span> -->
-
-
-
 <!-- Main part of the menu-->
 <div class="wrapper">
   <ul nz-menu nzMode="horizontal" nzTheme="dark">
     <li nz-menu-item>
-      <a nz-menu-item>{{pageTitle}}</a>
+      <a nz-menu-item [routerLink]="['']" routerLinkActive="active">{{
+        pageTitle
+      }}</a>
     </li>
     <nz-divider nzType="vertical"></nz-divider>
     <li nz-menu-item>
-      <a [routerLink]="['/welcome']"
-         routerLinkActive="active">Home</a>
+      <a [routerLink]="['/welcome']" routerLinkActive="active">Home</a>
     </li>
     <nz-divider nzType="vertical"></nz-divider>
     <li nz-menu-item>
-      <a [routerLink]="['/products']"
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{ exact : true}">Product List</a>
+      <a
+        [routerLink]="['/products']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Product List</a
+      >
     </li>
     <nz-divider nzType="vertical"></nz-divider>
     <li nz-menu-item>
-      <a [routerLink]="['/products', 0, 'edit']"
-         routerLinkActive="active">Add Product</a>
+      <a
+        [routerLink]="['/products', 0, 'edit']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Add Product</a
+      >
     </li>
 
     <nz-divider nzType="vertical"></nz-divider>
     <li nz-menu-item>
-      <a>Hide Messages</a>
+      <a (click)="message()">
+        <span *ngIf="!this.messageService.isDisplayed">Show </span>
+        <span *ngIf="this.messageService.isDisplayed">Hide </span>Messages
+      </a>
     </li>
     <nz-divider nzType="vertical" *ngIf="!isLoggedIn"></nz-divider>
-    <li nz-menu-item
-        *ngIf="!isLoggedIn">
-      <a [routerLink]="['/login']">Log In</a>
-    </li>
-    <nz-divider nzType="vertical" *ngIf="isLoggedIn"></nz-divider>
-    <li nz-menu-item
-        *ngIf="isLoggedIn">
-      <a [routerLink]="['/welcome']">Welcome {{ userName }}</a>
+    <li nz-menu-item *ngIf="!isLoggedIn">
+      <a
+        [routerLink]="['/login']"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+        >Log In</a
+      >
     </li>
     <nz-divider nzType="vertical" *ngIf="isLoggedIn"></nz-divider>
     <li nz-menu-item *ngIf="isLoggedIn">
-      <a (click)="logOut()">Log Out</a>
+      <a
+        [routerLink]="['/welcome']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Welcome {{ userName }}</a
+      >
+    </li>
+    <nz-divider nzType="vertical" *ngIf="isLoggedIn"></nz-divider>
+    <li nz-menu-item *ngIf="isLoggedIn">
+      <a
+        (click)="logOut()"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Log Out</a
+      >
     </li>
   </ul>
 </div>
+<!-- Spin -->
+<nz-spin nzTip="Loading..." *ngIf="isLoading">
+  <nz-alert
+    nzType="info"
+    nzMessage="We are loading your data"
+    nzDescription="A spin is just a wheel that cannot be stopped"
+  ></nz-alert>
+</nz-spin>
 
-<router-outlet></router-outlet>
+<div
+  class="container row" style="margin: auto"
+  [@zoomInAnimation]="outlet.isActivated ? outlet.activatedRoute : ''"
+>
+  <div class="col-md-10">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+  <div class="col-md-2">
+    <router-outlet name="popup"></router-outlet>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Product } from './product';
+import { Product, ProductResolved } from './product';
 import { ProductService } from './product.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,30 +13,18 @@ export class ProductDetailComponent {
   product: Product | null = null;
   errorMessage = '';
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      const id = +param;
-      this.getProduct(id);
-    }
+    const resolvedData: ProductResolved = this.route.snapshot.data['resolvedData']
+    if (resolvedData)
+      this.product = resolvedData.product
+    else
+      console.error('Prodotto inesistente')
+    this.onProductRetrieved()
   }
 
-  getProduct(id: number): void {
-    this.productService.getProduct(id).subscribe({
-      next: product => this.onProductRetrieved(product),
-      error: err => this.errorMessage = err
-    });
-  }
-
-  onProductRetrieved(product: Product): void {
-    this.product = product;
-
-    if (this.product) {
-      this.pageTitle = `Product Detail: ${this.product.productName}`;
-    } else {
-      this.pageTitle = 'No product found';
-    }
+  onProductRetrieved(): void {
+    this.pageTitle = this.product ? `Product Detail: ${this.product.productName}` : 'No product found';
   }
 }

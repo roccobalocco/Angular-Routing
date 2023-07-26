@@ -20,3 +20,24 @@ export const slideInAnimation = trigger('slideInAnimation', [
     ])
   ])
 ]);
+
+export const zoomInAnimation = trigger('zoomInAnimation', [
+  // Transition between any two states
+  transition('* <=> *', [
+    // Events to apply
+    // Defined style and animation function to apply
+    // Config object with optional set to true to handle when element not yet added to the DOM
+    query(':enter, :leave', style({ position: 'fixed', width: '100%', zIndex: 2 }), { optional: true }),
+    // group block executes in parallel
+    group([
+      query(':enter', [
+        style({ transform: 'scale(0)' }), // Start with 0 scale (zoomed out)
+        animate('0.5s ease-out', style({ transform: 'scale(1)' })) // End with scale 1 (normal size)
+      ], { optional: true }),
+      query(':leave', [
+        style({ transform: 'scale(1)' }), // Start with scale 1 (normal size)
+        animate('0.5s ease-out', style({ transform: 'scale(0)' })) // End with 0 scale (zoomed out)
+      ], { optional: true })
+    ])
+  ])
+]);

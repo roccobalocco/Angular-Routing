@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Product } from './product';
@@ -9,11 +9,11 @@ import { ProductService } from './product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  pageTitle = 'Product List';
-  imageWidth = 50;
-  imageMargin = 2;
-  showImage = false;
-  errorMessage = '';
+  pageTitle: string = 'Product List';
+  imageWidth: number = 50;
+  imageMargin: number = 2;
+  showImage: boolean = false;
+  errorMessage: string = '';
 
   _listFilter = '';
   get listFilter(): string {
@@ -27,9 +27,13 @@ export class ProductListComponent implements OnInit {
   filteredProducts: Product[] = [];
   products: Product[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private route: ActivatedRoute){}
 
   ngOnInit(): void {
+    this.showImage = this.route.snapshot.queryParamMap.get('showImage') === 'true'
+    this.listFilter = this.route.snapshot.queryParamMap.get('filterBy') || ''
+
     this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;

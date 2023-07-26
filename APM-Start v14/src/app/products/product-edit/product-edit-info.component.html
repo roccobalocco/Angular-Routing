@@ -1,77 +1,90 @@
-<div class="card-body" *ngIf="product">
-  <form novalidate
-        #productForm="ngForm">
-    <fieldset>
-      <legend>Basic Product Information</legend>
+<nz-space
+  [nzDirection]="'vertical'"
+  style="margin-left: 10px"
+  [nzAlign]="'center'" [nzWrap]="true"
+  class="col-md-10"
+>
+  <nz-card *nzSpaceItem zTitle="Basic Product Information">
+    <div *ngIf="product">
+      <form novalidate nz-form #productForm="ngForm" [nzLayout]="'inline'">
+        <fieldset>
+          <nz-form-item>
+            <nz-form-label for="productNameId">Product Name</nz-form-label>
+            <nz-form-control [nzXs]="24">
+              <input
+                nz-input
+                id="productNameId"
+                type="text"
+                placeholder="Name (required)"
+                required
+                minlength="3"
+                [(ngModel)]="product.productName"
+                name="productName"
+                #productNameVar="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (productNameVar.touched ||
+                      productNameVar.dirty ||
+                      product.id !== 0) &&
+                    !productNameVar.valid
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="productNameVar.errors?.['required']">
+                  Product name is required.
+                </span>
+                <span *ngIf="productNameVar.errors?.['minlength']">
+                  Product name must be at least three characters.
+                </span>
+              </span>
+            </nz-form-control>
+          </nz-form-item>
 
-      <div class="row mt-4">
-        <label class="col-md-2 col-form-label"
-               for="productNameId">Product Name</label>
-        <div class="col-md-8">
-          <input class="form-control"
-                 id="productNameId"
-                 type="text"
-                 placeholder="Name (required)"
-                 required
-                 minlength="3"
-                 [(ngModel)]=product.productName
-                 name="productName"
-                 #productNameVar="ngModel"
-                 [ngClass]="{'is-invalid': (productNameVar.touched ||
-                                            productNameVar.dirty ||
-                                            product.id !== 0) &&
-                                            !productNameVar.valid }" />
-          <span class="invalid-feedback">
-            <span *ngIf="productNameVar.errors?.['required']">
-              Product name is required.
-            </span>
-            <span *ngIf="productNameVar.errors?.['minlength']">
-              Product name must be at least three characters.
-            </span>
-          </span>
-        </div>
-      </div>
+          <nz-form-item>
+            <nz-form-label for="productCodeId">Product Code</nz-form-label>
+            <nz-form-control [nzXs]="24">
+              <input
+                nz-input
+                id="productCodeId"
+                type="text"
+                placeholder="Code (required)"
+                required
+                [(ngModel)]="product.productCode"
+                name="productCode"
+                #productCodeVar="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (productCodeVar.touched ||
+                      productCodeVar.dirty ||
+                      product.id !== 0) &&
+                    !productCodeVar.valid
+                }"
+              />
+              <span class="invalid-feedback">
+                <span *ngIf="productCodeVar.errors?.['required']">
+                  Product code is required.
+                </span>
+              </span>
+            </nz-form-control>
+          </nz-form-item>
 
-      <div class="row mt-2">
-        <label class="col-md-2 col-form-label"
-               for="productCodeId">Product Code</label>
-        <div class="col-md-8">
-          <input class="form-control"
-                 id="productCodeId"
-                 type="text"
-                 placeholder="Code (required)"
-                 required
-                 [(ngModel)]=product.productCode
-                 name="productCode"
-                 #productCodeVar="ngModel"
-                 [ngClass]="{'is-invalid': (productCodeVar.touched ||
-                                            productCodeVar.dirty ||
-                                            product.id !== 0) &&
-                                            !productCodeVar.valid }" />
-          <span class="invalid-feedback">
-            <span *ngIf="productCodeVar.errors?.['required']">
-              Product code is required.
-            </span>
-          </span>
-        </div>
-      </div>
-
-      <div class="row mt-2">
-        <label class="col-md-2 col-form-label"
-               for="descriptionId">Description</label>
-        <div class="col-md-8">
-          <textarea class="form-control"
-                    id="descriptionId"
-                    placeholder="Description"
-                    rows=3
-                    [(ngModel)]=product.description
-                    name="description"></textarea>
-        </div>
-      </div>
-    </fieldset>
-  </form>
-</div>
-
-<div class='alert alert-danger'
-     *ngIf='errorMessage'>{{errorMessage}}
-</div>
+          <nz-form-item>
+            <nz-form-label for="descriptionId">Description</nz-form-label>
+            <nz-form-control [nzXs]="24">
+              <textarea
+                nz-input
+                id="descriptionId"
+                placeholder="Description"
+                rows="3"
+                cols="50"
+                [(ngModel)]="product.description"
+                name="description"
+              ></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </fieldset>
+      </form>
+    </div>
+  </nz-card>
+</nz-space>
+<div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>

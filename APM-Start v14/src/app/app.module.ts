@@ -24,10 +24,12 @@ import { it_IT } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import it from '@angular/common/locales/it';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 registerLocaleData(it);
 
@@ -42,10 +44,11 @@ registerLocaleData(it);
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
     NzMenuModule,
     NzDividerModule,
-    NzFormModule
+    NzFormModule,
+    NzSpinModule,
+    NzAlertModule,
   ],
   declarations: [
     AppComponent,

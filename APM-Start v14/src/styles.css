@@ -2,16 +2,13 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
 
-div.card-header {
- font-size: large;
-}
 
 div.card {
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 .table {
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 a {
@@ -19,6 +16,17 @@ a {
 }
 
 [nz-button] {
-  margin-right: 8px;
-  margin-bottom: 12px;
+  margin: 12px 8px;
+}
+
+[nz-input] {
+  margin-bottom: 5px;
+}
+
+nz-form-label {
+  min-width: 100px;
+}
+
+nz-form-item {
+  min-width: 80px;
 }

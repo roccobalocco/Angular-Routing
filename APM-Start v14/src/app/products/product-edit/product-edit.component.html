@@ -1,98 +1,39 @@
-<div class="card">
-  <div class="card-header">
-    {{pageTitle}}
-  </div>
-
-  <div class="card-body"
-       *ngIf="product">
-    <form novalidate nz-form
-          #productForm="ngForm">
-
-      <nz-form-item>
-        <nz-form-label nzSpan="3">Product Name</nz-form-label>
-        <nz-form-control>
-          <input nz-input
-                 class="form-control"
-                 id="productNameId"
-                 type="text"
-                 placeholder="Name (required)"
-                 required
-                 minlength="3"
-                 [(ngModel)]=product.productName
-                 name="productName"
-                 #productNameVar="ngModel"
-                 [ngClass]="{'is-invalid': (productNameVar.touched || productNameVar.dirty) && !productNameVar.valid }" />
-          <span class="invalid-feedback">
-            <span *ngIf="productNameVar.errors?.['required']">
-              Product name is required.
-            </span>
-            <span *ngIf="productNameVar.errors?.['minlength']">
-              Product name must be at least three characters.
-            </span>
-          </span>
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-label nzSpan="3"> Code</nz-form-label>
-        <nz-form-control>
-          <input nz-input class="form-control"
-                 id="productCodeId"
-                 type="text"
-                 placeholder="Code (required)"
-                 required
-                 [(ngModel)]=product.productCode
-                 name="productCode"
-                 #productCodeVar="ngModel"
-                 [ngClass]="{'is-invalid': (productCodeVar.touched || productCodeVar.dirty) && !productCodeVar.valid }" />
-          <span class="invalid-feedback">
-            <span *ngIf="productCodeVar.errors?.['required']">
-              Product code is required.
-            </span>
-          </span>
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-label nzSpan="3">Description</nz-form-label>
-        <div class="col-md-8">
-          <textarea nz-input class="form-control"
-                    id="descriptionId"
-                    placeholder="Description"
-                    rows=3
-                    [(ngModel)]=product.description
-                    name="description"></textarea>
-        </div>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-control>
-          <button nz-button nzType="primary" [routerLink]="['/products', product.id]"
-                  style="width:80px"
-                  type="button"
-                  [title]="productForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
-                  [disabled]="!productForm.valid"
-                  (click)="saveProduct()">
-            Save
-          </button>
-          <button nz-button [routerLink]="['/products', product.id]"
-                  style="width:80px"
-                  type="button"
-                  title="Cancel your edits">
-            Cancel
-          </button>
-          <button nz-button nzDanger [routerLink]="['/products']"
-                  style="width:80px"
-                  type="button"
-                  title="Delete this product"
-                  (click)="deleteProduct()">
-            Delete
-          </button>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-  </div>
-</div>
+<nz-space class="col-md-12">
+  <nz-card class="col-md-12">
+    <h2>{{pageTitle}}</h2>
+  </nz-card>
+</nz-space>
+<nz-space [nzDirection]="'vertical'" style="margin-left:10px;" class="col-md-12">
+  <nz-anchor class="wizard">
+    <nz-badge style="margin-left:10px">
+      <a [routerLink]="['info']" routerLinkActive="active">
+        <span nz-icon nzType="info-circle" nzTheme="outline"
+          [style.color]="!dataIsValid['info'] ? 'red' : 'blue'"
+        ></span>
+        Basic Information
+      </a>
+    </nz-badge>
+    &nbsp;
+    <nz-badge>
+      <a [routerLink]="['tags']" routerLinkActive="active">
+        <span nz-icon nzType="tags" nzTheme="outline"
+        [style.color]="!dataIsValid['tags'] ? 'red' : 'blue'"></span>
+        Search Tags
+      </a>
+    </nz-badge>
+  </nz-anchor>
+  <br>
+  <nz-space [nzDirection]="'vertical'" [nzAlign]="'center'" style="margin-left:10px" class="col-md-12">
+    <router-outlet></router-outlet>
+    <nz-button-group style="margin-top:10px;">
+      <button nz-button nzType="primary" type="button" title="Save your entered data"
+        (click)="saveProduct()" [disabled]="!isValid()">Save</button>
+      <button nz-button type="button" title="Cancel your edits" [routerLink]="product!.id != 0 ? ['/products', product!.id] : ['/products']">Cancel</button>
+      <button nz-button nzDanger type="button" title="Delete this product"
+        (click)="deleteProduct()" [routerLink]="['/products']">Delete</button>
+    </nz-button-group>
+  </nz-space>
+</nz-space>
 
 <div class="alert alert-danger"
      *ngIf="errorMessage">{{errorMessage}}
