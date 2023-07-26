@@ -15,6 +15,8 @@ export class ProductEditComponent {
   errorMessage = '';
   dataIsValid: {[key: string]: boolean} = {};
   product: Product | null = null;
+  private originalProduct!: Product
+
 
   constructor(private productService: ProductService,
     private messageService: MessageService,

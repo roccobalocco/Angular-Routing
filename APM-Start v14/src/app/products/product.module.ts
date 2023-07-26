@@ -22,6 +22,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzCardModule } from 'ng-zorro-antd/card'; // Import the NzCardModule
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -43,6 +44,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzBadgeModule,
     NzTagModule,
     BrowserAnimationsModule,
+    NzTabsModule
   ],
   declarations: [
     ProductListComponent,

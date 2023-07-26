@@ -3,28 +3,33 @@
     <h2>{{pageTitle}}</h2>
   </nz-card>
 </nz-space>
-<nz-space [nzDirection]="'vertical'" style="margin-left:10px;" class="col-md-12">
-  <nz-anchor class="wizard">
-    <nz-badge style="margin-left:10px">
-      <a [routerLink]="['info']" routerLinkActive="active">
-        <span nz-icon nzType="info-circle" nzTheme="outline"
-          [style.color]="!dataIsValid['info'] ? 'red' : 'blue'"
-        ></span>
-        Basic Information
-      </a>
-    </nz-badge>
+<nz-space [nzDirection]="'vertical'" style="margin-left:10px;" class="col-md-12" [nzAlign]="'center'">
+  <nz-tabset>
+    <nz-tab [nzTitle]="Info">
+      <ng-template #Info>
+        <a [routerLink]="[{outlets: {info: 'info'}}]">
+          <i nz-icon [nzType]="'info-circle'" nzTheme="outline"
+            [style.color]="!dataIsValid['info'] ? 'red' : 'blue'"
+          ></i>
+          Basic Information
+        </a>
+      </ng-template>
+      <router-outlet name="info"></router-outlet>
+    </nz-tab>
     &nbsp;
-    <nz-badge>
-      <a [routerLink]="['tags']" routerLinkActive="active">
-        <span nz-icon nzType="tags" nzTheme="outline"
-        [style.color]="!dataIsValid['tags'] ? 'red' : 'blue'"></span>
-        Search Tags
-      </a>
-    </nz-badge>
-  </nz-anchor>
+    <nz-tab [nzTitle]="Tags">
+      <ng-template #Tags>
+        <a [routerLink]="[{outlets: {tags: 'tags'}}]">
+          <i nz-icon [nzType]="'tags'" nzTheme="outline"
+          [style.color]="!dataIsValid['tags'] ? 'red' : 'blue'"></i>
+          Search Tags
+        </a>
+      </ng-template>
+      <router-outlet name="tags"></router-outlet>
+    </nz-tab>
+  </nz-tabset>
   <br>
   <nz-space [nzDirection]="'vertical'" [nzAlign]="'center'" style="margin-left:10px" class="col-md-12">
-    <router-outlet></router-outlet>
     <nz-button-group style="margin-top:10px;">
       <button nz-button nzType="primary" type="button" title="Save your entered data"
         (click)="saveProduct()" [disabled]="!isValid()">Save</button>

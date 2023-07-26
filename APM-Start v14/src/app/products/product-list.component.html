@@ -60,7 +60,7 @@
               <button
                 nz-button
                 nzType="primary"
-                [routerLink]="['/products', product.id, 'edit']"
+                [routerLink]="['/products', product.id, 'edit', { outlets: { info: 'info'}}]"
               >
                 Edit
               </button>
