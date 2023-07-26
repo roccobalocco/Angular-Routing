@@ -4,8 +4,8 @@
   </nz-card>
 </nz-space>
 <nz-space [nzDirection]="'vertical'" style="margin-left:10px;" class="col-md-12" [nzAlign]="'center'">
-  <nz-tabset>
-    <nz-tab [nzTitle]="Info">
+  <nz-tabset nzCentered>
+    <nz-tab [nzTitle]="Info" >
       <ng-template #Info>
         <a [routerLink]="[{outlets: {info: 'info'}}]">
           <i nz-icon [nzType]="'info-circle'" nzTheme="outline"
