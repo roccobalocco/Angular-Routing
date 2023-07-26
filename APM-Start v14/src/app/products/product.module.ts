@@ -8,9 +8,6 @@ import { ProductEditInfoComponent } from './product-edit/product-edit-info.compo
 import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
 
 import { SharedModule } from '../shared/shared.module';
-import { ProductRoutingModule } from './product-routing.module';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -23,6 +20,9 @@ import { NzCardModule } from 'ng-zorro-antd/card'; // Import the NzCardModule
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { RouterModule } from '@angular/router';
+import { ProductResolver } from './product-resolver.service';
+import { EditGuard } from './product-edit/edit.guard';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -32,7 +32,34 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 @NgModule({
   imports: [
     SharedModule,
-    ProductRoutingModule,
+    //ProductRoutingModule,
+    RouterModule.forChild([
+      { path: '', component: ProductListComponent },
+      {
+        path: ':id',
+        component: ProductDetailComponent,
+        resolve: { resolvedData: ProductResolver },
+      },
+      {
+        path: ':id/edit',
+        component: ProductEditComponent,
+        resolve: { resolvedData: ProductResolver },
+        canDeactivate: [EditGuard],
+        children: [
+          { path: '', redirectTo: "info", pathMatch: 'full', outlet: 'info' },
+          {
+            path: 'info',
+            component: ProductEditInfoComponent,
+            outlet: 'info'
+          },
+          {
+            path: 'tags',
+            component: ProductEditTagsComponent,
+            outlet: 'tags'
+          },
+        ],
+      }
+    ]),
     NzFormModule,
     FormsModule,
     NzButtonModule,
@@ -43,7 +70,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzCardModule,
     NzBadgeModule,
     NzTagModule,
-    BrowserAnimationsModule,
     NzTabsModule
   ],
   declarations: [

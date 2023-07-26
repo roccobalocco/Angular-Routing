@@ -58,6 +58,7 @@
     <li nz-menu-item *ngIf="isLoggedIn">
       <a
         (click)="logOut()"
+        [routerLink]="['/welcome']"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         >Log Out</a
