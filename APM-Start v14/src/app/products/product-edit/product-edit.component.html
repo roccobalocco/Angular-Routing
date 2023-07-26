@@ -9,7 +9,7 @@
       <ng-template #Info>
         <a [routerLink]="[{outlets: {info: 'info'}}]">
           <i nz-icon [nzType]="'info-circle'" nzTheme="outline"
-            [style.color]="!dataIsValid['info'] ? 'red' : 'blue'"
+            [style.color]="!dataIsValid['info'] ? 'red' : 'white'"
           ></i>
           Basic Information
         </a>
@@ -21,7 +21,7 @@
       <ng-template #Tags>
         <a [routerLink]="[{outlets: {tags: 'tags'}}]">
           <i nz-icon [nzType]="'tags'" nzTheme="outline"
-          [style.color]="!dataIsValid['tags'] ? 'red' : 'blue'"></i>
+          [style.color]="!dataIsValid['tags'] ? 'red' : 'white'"></i>
           Search Tags
         </a>
       </ng-template>

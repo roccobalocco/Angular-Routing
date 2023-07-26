@@ -2,6 +2,15 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
 
+body {
+  background-color: #212529;
+}
+
+.card-body {
+  color: #fcfbf4;
+  background-color: #212529;
+}
+
 
 div.card {
   margin-top: 10px;
@@ -15,12 +24,25 @@ a {
   text-decoration: none;
 }
 
+nz-space {
+  background-color: #212529;
+}
+
 [nz-button] {
   margin: 12px 8px;
 }
 
 [nz-input] {
   margin-bottom: 5px;
+  color: black;
+}
+
+#userNameId{
+  color: #fcfbf4;
+}
+
+#passwordId{
+  color: #fcfbf4;
 }
 
 nz-form-label {

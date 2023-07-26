@@ -20,7 +20,7 @@ import { NzCardModule } from 'ng-zorro-antd/card'; // Import the NzCardModule
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { ProductResolver } from './product-resolver.service';
 import { EditGuard } from './product-edit/edit.guard';
 
@@ -56,9 +56,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
             path: 'tags',
             component: ProductEditTagsComponent,
             outlet: 'tags'
-          },
+          }
         ],
-      }
+      },
     ]),
     NzFormModule,
     FormsModule,
