@@ -25,6 +25,7 @@ import { EditGuard } from './product-edit/edit.guard';
             path: ':id/edit',
             component: ProductEditComponent,
             resolve: { resolvedData: ProductResolver },
+            canDeactivate: [EditGuard],
             children: [
               { path: '', redirectTo: "info", pathMatch: 'full', outlet: 'info' },
               {
